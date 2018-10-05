@@ -5,6 +5,7 @@
   <title>Scoped CSS Variables and JS</title>
 </head>
 <body>
+  <!--'hl' is class highlight -->
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
@@ -20,7 +21,28 @@
 
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
+  <!-- You have to define your CSS variables on specific elements. root is the highest level
+  It is as if you are defining this variable on the entire HTML file -->
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 50px;
+      --blur: 10px;
+    }
+    
+    /*
+    variables need a '--' in css in oder to be defined
+    */
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
+    
+    /* Anything with a class highlight with have a color based on the base */
+    .hl {
+      color: var(--base);
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -45,6 +67,27 @@
   </style>
 
   <script>
+    // We need to select all inputs from the Class controls
+    const inputs = document.querySelectorAll('.controls input');
+    
+    // now we need to create a function which allows us to use the GUI interface in
+    // in order to update CSS variables
+    function handleUpdate() {
+      // first thing we need to do is determine the suffix variable which in our
+      // example are spacing and blue. base is simply a color hex code. see lines 13 & 16
+      const suffix = this.dataset.sizing || ''; //need the 'or' nothing here bc it will draw an error otherwise
+      
+      // now we have to actually update the Variables
+      // console.log(this.name); to see the variables on the html file
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+    }
+    
+    // 'change' is a css method that marks the change of a given variable against in the GUI interface
+    // we can also use the mouse movement on a given variable
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+
   </script>
 
 </body>

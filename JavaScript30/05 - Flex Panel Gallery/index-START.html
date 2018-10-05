@@ -26,6 +26,8 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      /* display: flew transposes the image from horizontal to vertical*/
+      display: flex;
     }
 
     .panel {
@@ -43,6 +45,12 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      /*This is where we space out the images on the screen */ 
+      flex: 1; /* this evenly distributes the images across the page*/
+      justify-content: center; 
+      align-items: center;
+      display: flex; 
+      flex-direction: column; /*This needs to be here to redorder the words vertically*/
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -56,7 +64,21 @@
       margin: 0;
       width: 100%;
       transition: transform 0.5s;
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    /*This moves the top word from off the screen */
+    .panel > *:first-child { transform: translateY(-100%); }
+    /*This moves the top word back into the screen when the state is changed to open-active */
+    .panel.open-active > *:first-child { transform: translateY(0%); }
+    /*This moves the bottom word from off the screen */
+    .panel > *:last-child { transform: translateY(100%); }
+    /*This moves the bottom word back into the screen when the state is changed to open-active */
+    .panel.open-active > *:last-child { transform: translateY(0%); }
+
 
     .panel p {
       text-transform: uppercase;
@@ -70,6 +92,10 @@
     }
 
     .panel.open {
+      /* Having a flex of 5 means that a given panel will take up 
+      5x the amount of space relative to the other panels whenever
+      the state of the panel is changed to 'open*/
+      flex: 5;
       font-size: 40px;
     }
 
@@ -105,7 +131,29 @@
   </div>
 
   <script>
+    // need to create a variable for selecting all the panels
+    const panels = document.querySelectorAll('.panel');
 
+    function toggleOpen() {
+      console.log('Hello');
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+      // since flex and font are changed whenever an event occurs 
+      // we need to create a toggle function which animates the page
+      // whenever the state is 'open-active'
+      console.log(e.propertyName);
+      if (e.propertyName.includes('flex')){
+        this.classList.toggle('open-active');
+      }
+    }
+    
+    //for each panel in the html file, look for the click event, and run the togglOpen script
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    //This runs another script for when the image has transitionend
+    // it will bring the words that were off the screen back onto the screen
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
   </script>
 
 
