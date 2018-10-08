@@ -17,6 +17,77 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+// endpoint is an array with a json file which we need to parse in to a workable format
+const cities = [];
+// fetch is a new API in the browser which allows you to grab json data
+// fetch returns a promise - need '.then' to return the blob of data
+// we need to specifically convert the raw data into json 
+fetch(endpoint)
+  .then(blob => blob.json())
+  // we push the data here because we don't want the const cities to change later
+  // ... is a spread which allows you to properly divide the array of cities,
+  // and not create a list of list
+  .then(data => cities.push(...data));
+
+// Run a function which filters down the array of cities
+function findMatches(wordToMatch, cities) {
+  return cities.filter(place => {
+    //here we need to figure out if the city or state matches what was searched
+    // We now need to put a variable into a RegEx
+    // 'g' is global - looks through entire string, 'i'means case insensitive
+    const regex = new RegExp(wordToMatch, 'gi');
+    // we then return the match of the RegEx above
+    // city and sate are keys in the json file 
+    return place.city.match(regex) || place.state.match(regex)
+  });
+}
+// Now we need to create a function that put in commas for us in the population
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+
+
+// now that we created the find function, we need to create the display function
+function displayMatches(){
+  // we need to create a const with the findMatches function
+  // this.value is the letters in the search bar
+  // this returns the data to be matched
+  const matchArray = findMatches(this.value, cities);
+  // the html const is used to loop over the json file
+  const html = matchArray.map(place => {
+    //now we will create a new regex which allows us to highlight the word typed
+    // we are replacing the word typed with a span with class hl which is the same
+    // word but it is highlighted
+    const regex = new RegExp(this.value, 'gi');
+    const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    const stateName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    // <li> is list item
+    // return with ` is the specific items we are returning
+    return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+        <span class="population">${numberWithCommas(place.population)}</span>
+      </li>
+    `;
+    // this joins the array as a string
+  }).join('');
+  // this calls the specific html query
+  suggestions.innerHTML = html;
+}
+
+// Since the search bar is a class 'search' and 'suggestion'
+// we need to create consts and queries for each of the classes
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+//We now need to add EventListeners to trigger the query and run the displayMatch function
+// 'change' occurs whenever the input text is changed and a click occurs off the search bar
+// 'keyup' occurs whenever keys are changed in the search bar
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);
+
+
 </script>
   </body>
 </html>
