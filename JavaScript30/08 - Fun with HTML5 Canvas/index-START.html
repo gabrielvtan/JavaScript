@@ -7,6 +7,81 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+//set const for the canvas
+// canvas is basically like MS paint
+const canvas = document.querySelector('#draw');
+// set context to 2d plane
+const ctx = canvas.getContext('2d');
+// now we size up the cavas to be same width and height as the windom see line 8
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+// now we set the style for the actual brush
+ctx.strokStyle = '#BADA55';
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 10;
+// ctx.globalCompositeOperation = 'multiply';
+
+//Set a flag to draw on canvas when the mouse is clicked
+let isDrawing = false;
+//this sets a starting point for the line drawn 
+let lastX = 0;
+let lastY = 0;
+let hue = 0;
+// this allows us to build up the girth of the line
+let direction = true;
+
+function draw(e) {
+  if (!isDrawing) return; // stop the function from running when they are not clicking on the mouse
+  console.log(e);
+  // here we use hsl to set the hue of the colors 
+  // first number is saturation, next is brightnes
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`; 
+
+  // ctx is where we do all the drawing on the canvas so we use this to
+  // handle all the drawing functions. We first have to first start the ctx path
+  ctx.beginPath();
+  // start drawing from 
+  ctx.moveTo(lastX, lastY)
+  //go to 
+  // e.offsetX is on the console on the HTML page
+  ctx.lineTo(e.offsetX, e.offsetY)
+  ctx.stroke();
+  // When we are done with the draw function, we want to update the lastX and lastY to where we ended
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+
+  // we now here programatically create the different colors of the line drawn
+  // hue++ changes the color of the line as you move the mouse
+  hue++;
+  // here we reset the hue so we can continue working in 360 intervals
+  if (hue >= 360) {
+    hue = 0;
+  }
+  // for every loop, we are going to increment the line width
+  if (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) {
+    //flip the direction
+    direction = !direction;
+  }
+  // greater than 100, then we decrement - if 1, then increment
+  if(direction) {
+    ctx.lineWidth++;
+  } else {
+    ctx.lineWidth--;
+  }
+  
+
+}
+
+// We have to update lastX and lastY to where we are on the screen when we click the mouse down
+canvas.addEventListener('mousedown', (e) => {
+  isDrawing = true;
+  [lastX, lastY] = [e.offsetX, e.offsetY];
+});
+
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', () => isDrawing = false);
+canvas.addEventListener('mouseout', () => isDrawing = false);
+
 </script>
 
 <style>
