@@ -5,12 +5,13 @@
   <title>Console Tricks!</title>
 </head>
 <body>
-
+  <!-- You can set up functions within a paragraph tag-->
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
-
+    // this function sets the font size to 50 and text to 'BADA55'(green) 
+    // whenever the paragraph is clicked
     function makeGreen() {
       const p = document.querySelector('p');
       p.style.color = '#BADA55';
@@ -18,28 +19,85 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    // use %s to insert a specific string
+    // this is the poop emoji
+    console.log('Hello I am a %s string!', '\u{1F4A9}')
 
     // Styled
+    // You can also add text-shadow and have a different highlight and size as well
+    // %c is the tag which allows you to add a style to a given console.log
+    //console.log('%c I am some great text', 'font-size:50px; background:red;')
 
     // warning!
+    console.warn('DANGER DANGER');
 
     // Error :|
+    console.error('SHIT SHIT SHIT');
 
     // Info
+    console.info('Fun Fact: Crocodiles eat 3-4 people per year');
 
     // Testing
+    console.assert(1===2, 'That is wrong!')
+
+    const p = document.querySelector('p');
+
+    console.assert(p.classList.contains('ouch'), 'The paragraph does not contain ouch');
 
     // clearing
+    // clear your console
+    console.clear()
 
     // Viewing DOM Elements
+    // can console log the specific paragraph
+    console.log(p);
+    // or console log the directory of a paragraph 
+    console.dir(p);
 
+    console.clear();
+    
     // Grouping together
+    // you need to add both a groupCollapsed and group end in order to 
+    // group the dogs by their given name
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    // logs in real time, how many names have been counted
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
 
     // timing
+    // how long it takes to get something 
+    // always need to start with console.time then end with console.timeEnd
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+    // then convert to json 
+      .then(data => data.json())
+      .then(data =>{
+        console.timeEnd('fetching data');
+        console.log(data);
+      });
+
+    console.table(dogs)
 
   </script>
 </body>
