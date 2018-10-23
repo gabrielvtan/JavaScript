@@ -43,6 +43,9 @@
   </div>
 
   <script>
+    // this function runs at most for however many seconds 
+    // this is relevant for the scroll event as you do not want the function to run
+    // too many times
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -56,7 +59,33 @@
         timeout = setTimeout(later, wait);
         if (callNow) func.apply(context, args);
       };
+    };
+
+    // create variable for all the images. class 'slide-in'
+    const sliderImages = document.querySelectorAll('.slide-in');
+
+    // create function which runs whenever the user scrolls past a certain point on the screen
+    function checkSlide(e) {
+      // Need to loop over every single image to find out where the image needs to be on the page
+      sliderImages.forEach(sliderImage => {
+        // set the slide in mark at the halfway point of the image
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+        // set bottom of image as a variable as well so that scroll works both ways
+        // offsetTop is the distance from the tope of the window
+        const imageBottom = sliderImage.offsetTop + sliderImage.height;
+        // now need to see if image is halfshow
+        const isHalfShown = slideInAt > sliderImage.offsetTop;
+        const isNotScrolledPast = window.scrollY < imageBottom;
+        if (isHalfShown && isNotScrolledPast) {
+          sliderImage.classList.add('active');
+        } else {
+          sliderImage.classList.remove('active');
+        }
+      });
     }
+    
+    // Creat event listener for when the user scrolls on the page
+    window.addEventListener('scroll', debounce(checkSlide));
 
   </script>
 
