@@ -7,6 +7,26 @@
 </head>
 <body>
 <script>
+// this script is used to keep a record of the key strokes typed on a given webpage
+
+// create an array to keep track of the keys pressed
+const pressed = [];
+const secretCode = 'jasonlame'
+
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+  // push a given key once it is pressed
+  pressed.push(e.key);
+  // this sets the array to only the length required by the secret secretCode
+  // need to start from the end of the word
+  pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+  // logic of seeing if the secret code is typed
+  if (pressed.join('').includes(secretCode)) {
+    console.log('DING DING!');
+    cornify_add();
+  }
+  console.log(pressed);
+});
 </script>
 </body>
 </html>
