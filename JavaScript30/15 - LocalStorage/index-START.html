@@ -28,7 +28,72 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+
+  // Try to parse the items from local storage or set the items as a blank array
+  const items = JSON.parse(localStorage.getItem('items')) || [];
+  // The goal of this excercise is to add local storage and to understand event delegation
+
+  // Create function for adding items to the local storage
+  function addItem(e) {
+    // This will stop the page from reloading
+    e.preventDefault();
+    // We use 'this.querySelector' here because we want to get a specific input 
+    // from the input box on the page, this is especially useful when there are 
+    // multiple submit buttons on the page
+    const text = (this.querySelector('[name=item]')).value;
+    // done is set to false, to keep the check-box unclicked
+    const item = {
+      text, 
+      done: false
+    };
+    //console.log(text);
+    // This resets the page after the text is inputed
+    items.push(item)
+    populateList(items, itemsList);
+    // This is where you save to LocalStorage, which is only saved as key-value pairs
+    // The data here may only be strings, thus you must stringify the items
+    localStorage.setItem('items', JSON.stringify(items));
+    this.reset();
+  }
+
+  // Now we need to create the actual HTML list with the checkbox
+  // change the variables to input to make the function more resilient
+  // this function takes a set of given inputs and saves it as a dropdown list
+  // the return statement is what changes the form on the HTML page 
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((plate, i) => {
+      // 'plate.done' is a turnary operator which defaults a blank checkbox
+      return `
+      <li>
+        <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+        <label for="item${i}">${plate.text}</label>
+      </li>
+      `;
+    }).join('');
+  }
+
+  // Think of the toggle function as a strict parent trying to manage unruly children
+  // function has to be structured different bc HTML is being added after the page is created
+  function toggleDone(e) {
+    // need to isolate the single check-box selected
+    // if the event target specifically matches the input, return
+    // this is event delegation
+    if(!e.target.matches('input')) return; // skip this unless it's an input
+    // set done to true for the item that was checked
+    const el = e.target;
+    const index = el.dataset.index;
+    console.log(el.dataset.index);
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  // Create event listeners
+  // We use 'submit' for the buttons and not 'click'
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone);
+  // Populate the local storage list with the items that were added 
+  populateList(items, itemsList);
 
 </script>
 
