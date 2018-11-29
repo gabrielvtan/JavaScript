@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const</title>
+</head>
+<body>
+<script>
+  // var allows your to reassign the value of a variable 
+  function setWidth() {
+    var width = 100;
+    console.log(width);
+  }
+  setWidth();
+  
+  // var is globally scoped variable because it is not scoped within a function
+  // if let or const is used here instead of var, then it will be blocked scoped and not globally available
+  var age = 100;
+  if(age > 12) {
+    const dogYears = age * 7;
+    console.log(`You are ${dogYears} dog years old!`);
+  }
+
+  let height = 200;
+  const key = 'abc123';
+</script>
+</body>
+</html>

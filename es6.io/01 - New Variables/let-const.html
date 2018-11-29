@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const</title>
+</head>
+<body>
+<script>
+  // You may not reassign let within a given scope. 
+  // Additionally, a globally scoped variable will take precedence over a local variable
+  const key = 'abc123';
+  let points = 50;
+  let winner = false;
+
+  // the properties of a const may be reassigned
+  const person = {
+    name: 'Wes',
+    age: 28
+  }
+  
+  // you can do person.age = 29
+
+  // this actually freezes your ability to change variables 
+  const wes = Object.freeze(person);
+
+</script>
+</body>
+</html>

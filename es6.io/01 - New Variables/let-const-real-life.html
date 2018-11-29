@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>let and const real world</title>
+</head>
+<body>
+<script>
+    // recall that let and const are block scoped - i.e. variables within a {}
+  {
+    const name = 'wes';
+    console.log(name);
+  }
+
+  //By using let within the for loop, i becomes scoped within the curly brackets
+  for(let i = 0; i < 10; i++) {
+    console.log(i);
+    setTimeout(function() {
+      console.log('The number is ' + i);
+    },1000);
+  }
+
+</script>
+</body>
+</html>
