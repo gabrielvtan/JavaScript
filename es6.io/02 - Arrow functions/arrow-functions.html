@@ -7,23 +7,31 @@
 <body>
 <script>
   const names = ['wes', 'kait', 'lux'];
-
+  
+  //Until fullNames4 are different ways to add a last name to a given list
+  //`${name}` - back ticks are used for template strings
   const fullNames = names.map(function(name) {
     return `${name} bos`;
   });
 
+  // you can drop the word function and add a fat arrow in replacement
   const fullNames2 = names.map((name) => {
     return `${name} bos`;
   });
-
+  
+  // If you only have one parameter, a parenthesis is not needed
   const fullNames3 = names.map(name => {
     return `${name} bos`;
   });
 
+
+  // This is an implicit return - you need to delete the curly brackets 
   const fullNames4 = names.map(name => `${name} bos`);
 
+  // This is an example if you have no arguments at all
   const fullNames5 = names.map(() => `cool bos`);
-
+  
+  // this is how you name functions, the last 4 functions do not have names and thus cannot be called upon
   const sayMyName = (name) => {
     alert(`Hello ${name}!`)
   }

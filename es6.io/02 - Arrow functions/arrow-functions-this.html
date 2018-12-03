@@ -61,6 +61,28 @@
   </div>
 
   <script>
+      const box = document.querySelector('.box')
+      box.addEventListener('click', function(){
+          let first = 'opening'
+          let second = 'open'
+
+          // You need to set up the reverse for the close of the box.   
+          if(this.classList.contains(first)) {
+              //switch them
+              [first, second] = [second, first];
+          }
+          //console.log(this) -> this will print the box as it is being called 
+          // in this case, the arrow function should not be used because 
+          //we need the key word to reference the actual box that got clicked
+
+          // whenever we use 'this' we need to make sure that we are binding it within
+          // the function, otherwise it will revert the binding back to the windows
+          this.classList.toggle(first);
+          setTimeout(()=>{
+              this.classList.toggle(second);
+          }, 250);
+      });
+
   </script>
 
 </body>

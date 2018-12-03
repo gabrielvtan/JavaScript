@@ -6,10 +6,12 @@
 </head>
 <body>
 <script>
+  // in es6, you have the ability to define the variables whenever you create a function
   function calculateBill(total, tax = 0.13, tip = 0.15) {
     return total + (total * tax) + (total * tip);
   }
 
+  // In this example, you can write undefinied and it will take the 0.13 percent that was defined the in function
   const totalBill = calculateBill(100, undefined, 0.25);
   console.log(totalBill);
 </script>

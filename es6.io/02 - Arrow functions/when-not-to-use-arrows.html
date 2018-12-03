@@ -13,6 +13,7 @@
 
 <script>
   // When you really need `this`
+  // you cannot use an arrow function in this example as it cause this to not be scoped within the function
   const button = document.querySelector('#pushy');
   button.addEventListener('click', function() {
     console.log(this);
@@ -20,6 +21,7 @@
   });
 
   // When you need a method to bind to an object
+  // Again you cannot use the arrow function as it will cause this to be defined outside the scope of the function
   const person = {
     points: 23,
     score() {
@@ -39,11 +41,14 @@
   const beemer = new Car('bmw', 'blue');
   const subie = new Car('Subaru', 'white');
 
+  // prototype allows you to apply given functions to a class - in this example 'Car'
+  // AGain you don't use arrows here because we need to use `this` within the scope of the function 
   Car.prototype.summarize = function() {
      return `This car is a ${this.make} in the colour ${this.colour}`;
   };
 
   // When you need arguments object
+  //
   const orderChildren = function() {
     const children = Array.from(arguments);
     return children.map((child, i) => {
@@ -52,7 +57,7 @@
     console.log(arguments);
   }
 
-
+// IN GENERAL, you DO NOT use arrow functions if you need to use `this` within the scope of a given function
 </script>
 </body>
 </html>

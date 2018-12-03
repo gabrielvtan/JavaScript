@@ -10,10 +10,15 @@
 const race = '100m Dash';
 const winners = ['Hunter Gath', 'Singa Song', 'Imda Bos'];
 
+// Parenthesis signal an implicit return so that something will be returned whenever the const win is called 
+// you don't have to do race: race and just input race and it wil be given a key name matching the value
 const win = winners.map((winner, i) => ({name: winner, race, place: i + 1}));
+
+console.table(win)
 
 const ages = [23,62,45,234,2,62,234,62,34];
 
+// this is equivalent to saying if the age is greater than 60, then return the age 
 const old = ages.filter(age => age >= 60);
 console.log(old);
 
