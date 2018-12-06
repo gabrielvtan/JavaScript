@@ -12,6 +12,9 @@
     keywords: ['pale', 'cloudy', 'spiced', 'crisp']
   };
 
+  // similar to react, we create a render function to handle different parts of the application
+  // The renderKeywords function here then displays each keyword within the list
+  // remember the add the .join('') to eliminate the commas
   function renderKeywords(keywords) {
     return `
       <ul>
@@ -20,6 +23,7 @@
     `;
   }
 
+  // In this example, we are using the renderKeywords function to display the list of keywords
   const markup = `
     <div class="beer">
       <h2>${beer.name}</h2>

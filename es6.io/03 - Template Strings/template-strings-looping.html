@@ -6,12 +6,14 @@
 </head>
 <body>
 <script>
+  // You also may loop over template strings
   const dogs = [
     { name: 'Snickers', age: 2 },
     { name: 'Hugo', age: 8 },
     { name: 'Sunny', age: 1 }
   ];
-
+  //ul is unordered list
+  // in this set up we have a template string inside a template string which we loop through 
   const markup = `
     <ul class="dogs">
       ${dogs.map(dog => `
