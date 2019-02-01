@@ -16,13 +16,18 @@ const model = 'x5';
 const colour = 'Royal Blue';
 
 // .startsWith()
+console.log(course.startsWith('RFB'));
+console.log(flightNumber.startsWith('AC', 3))
 
 // .endsWith()
+console.log(flightNumber.endsWith('jz'));
 
 // .includes()
+console.log(flightNumber.includes('AC'))
 
-// .repeat()
+// .repeat() - allows you to take a string and repeat it several times 
 
+// this will take a string and pad it with however many characters are needed
 function leftPad(str, length = 20) {
   return `→ ${' '.repeat(length - str.length)}${str}`;
 }
