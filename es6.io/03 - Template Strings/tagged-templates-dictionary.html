@@ -21,9 +21,34 @@
     CSS: 'Cascading Style Sheets',
     JS: 'JavaScript'
   };
+  // Here we want to wrap any words with an abbreviation in the abbr tag 
+  function addAbbreviations (strings, ...values) {
+      // Here we are mapping the values of the dict and returning them in the abbr tag
+      // we are first checking to see if there is a value for a given key and then returning the key 
+      const abbreviated = values.map(value => {
+          if(dict[value]) {
+              return `<abbr title="${dict[value]}">${value}</abbr>`
+          }
+          return value;
+      });
+      console.log(abbreviated);
+      
+      // reduce will loop over each string and join them in the string
+      // it will take the sentence, apply the addAbbreviations() method to it, and then render the string to HTML
+      return strings.reduce((sentence, string, i) =>{
+        return `${sentence}${string}${abbreviated[i] || ''}`;
+      },'');
+  }
 
   const first = 'Wes';
   const last = 'Bos';
+  // HTML, CSS, and JS are strings here but will also receive the function tag given its syntax
+  const sentence = addAbbreviations`Hello my name is ${first} ${last} and I love to code ${'HTML'}, ${'CSS'} and ${'JS'}`;
+
+  const bio = document.querySelector('.bio');
+  const p = document.createElement('p');
+  p.innerHTML = sentence;
+  bio.appendChild(p);
 
 </script>
 </body>

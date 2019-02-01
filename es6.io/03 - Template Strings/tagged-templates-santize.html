@@ -18,6 +18,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/0.8.2/purify.min.js"></script>
 <script>
+  // Here we run a sanitizing method which takes the user input and sanitizes for code embedded in the input
+  // we similarly add the values strings and values and reduce the string then sanitize it
   function sanitize(strings, ...values) {
     const dirty = strings.reduce((prev, next, i) => `${prev}${next}${values[i] || ''}`, '');
     return DOMPurify.sanitize(dirty);
@@ -26,6 +28,7 @@
   const first = 'Wes';
   const aboutMe = `I love to do evil <img src="http://unsplash.it/100/100?random" onload="alert('you got hacked');" />`;
 
+  // you may also tag a method to the HTML directly 
   const html = sanitize`
     <h3>${first}</h3>
     <p>${aboutMe}</p>

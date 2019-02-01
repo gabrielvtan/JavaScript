@@ -11,8 +11,12 @@
 </head>
 <body>
 <script>
+  // ... is a rest operator which will take the rest of the values of the argument and put it in the array for us
   function highlight(strings, ...values) {
     let str = '';
+    // values[i] || '' lets you return the value of the variables, otherwise, it returns an empty string
+    // tacking the span on there allows you to set the class to hl 
+    // contenteditable allows you to edit the values of the highlighted string
     strings.forEach((string, i) => {
       str += `${string} <span contenteditable class="hl">${values[i] || ''}</span>`;
     });
@@ -21,7 +25,7 @@
 
   const name = 'Snickers';
   const age = 100;
-
+  // Here we are attaching the highlight function to the string 
   const sentence = highlight`My dog's name is ${name} and he is ${age} years old`;
   document.body.innerHTML = sentence;
   console.log(sentence);
