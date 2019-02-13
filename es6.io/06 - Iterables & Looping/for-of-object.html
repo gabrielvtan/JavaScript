@@ -14,6 +14,7 @@
     sugar: 10
   };
 
+  // since objects are not iterable, we have to add an index position to access the value for a given key 
   for (const prop in apple) {
     const value = apple[prop];
     console.log(value, prop);

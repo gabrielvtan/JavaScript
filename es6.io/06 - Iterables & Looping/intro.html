@@ -7,6 +7,7 @@
 <body>
 <script>
   /* eslint-disable */
+  // this is a method that allows you to shuffle the position of elements within an array 
    Array.prototype.shuffle = function() {
      var i = this.length, j, temp;
      if ( i == 0 ) return this;
@@ -22,11 +23,14 @@
   const cuts = ['Chuck', 'Brisket', 'Shank', 'Short Rib'];
 
   cuts.shop = 'MM MEats';
-
+ 
+  
+  // This is the standard way of creating for loops 
   // for (let i = 0; i < cuts.length; i++) {
   //   console.log(cuts[i]);
   // }
-
+  
+  // You can also use the forEach method to get each cut - however you may not skip elements within the array 
   // cuts.forEach((cut) => {
   //   console.log(cut);
   //   if(cut === 'Brisket') {
@@ -34,10 +38,13 @@
   //   }
   // });
 
+  // This is an example of a for-in loop   
   // for (const index in cuts) {
   //   console.log(cuts[index]);
   // }
-
+  
+  // This is the for-of loop which is the best way of accessesing the values of a given array - it should not be used with objects however, 
+  // we are no longer using positions within a given array 
   for (const cut of cuts) {
     if(cut === 'Brisket') {
       continue;
