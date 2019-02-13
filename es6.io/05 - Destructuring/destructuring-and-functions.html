@@ -16,12 +16,18 @@
     return converted;
   }
 
+  // here we set the variable equal to a default blank object - it will allows you to pass the tipCalc function without arguments - it will just be the default 
   function tipCalc({ total = 100, tip = 0.15, tax = 0.13 } = {}) {
     return total + (tip * total) + (tax * total);
   }
 
+  // Since we have default values above, we can leave off variables such as taxes 
   const bill = tipCalc({ tip: 0.20, total: 200 });
   console.log(bill);
+
+  const convertedBill = convertCurrency(bill)
+  console.log(convertedBill)
+  console.log(convertedBill.USD)
 
 </script>
 </body>

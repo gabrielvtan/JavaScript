@@ -6,6 +6,7 @@
 </head>
 <body>
 <script>
+   // Destructuring is the process of extracting data from arrays, object, and maps, and sets into their own variables
   const person = {
     first: 'Wes',
     last: 'Bos',
@@ -14,8 +15,11 @@
     twitter: '@wesbos'
   };
 
+  // this is how we destructure an object. It is the equivalent of writing:
+  // const first = person.first; const last = person.last; const twitter = person.twitter
   const { first, last, twitter } = person;
-
+  
+  // This is a nested object which takes a little more to destructure 
   const wes = {
     first: 'Wes',
     last: 'Bos',
@@ -30,10 +34,16 @@
     }
   };
 
+  // when data is nested, then you have to add the values of a given key to get to the last nested value 
   const { twitter: tweet, facebook: fb } = wes.links.social;
 
+  console.log(tweet)
+  console.log(fb)
+
   const settings = { width: 300, color: 'black' }  // height, fontSize
+  // the destructuring will take the values from settings, but will then fall to the default values otherwise 
   const { width = 100, height = 100, color = 'blue', fontSize = 25} = settings;
+  console.log(settings)
 
 </script>
 </body>
