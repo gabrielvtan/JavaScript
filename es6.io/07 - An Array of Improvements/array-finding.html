@@ -177,9 +177,22 @@
         "display_src":"https://scontent.cdninstagram.com/hphotos-xpt1/t51.2885-15/e35/11326072_550275398458202_1726754023_n.jpg"
      }
   ];
+  // Above is an example of an API call from instragram - we will be using .find() and .findIndex() in order to access the data 
   const code = 'VBgtGQcSf';
-  const post = posts.find(post => post.code === code);
+  // Long-way of finding the post
+  //   const post = posts.find(post => {
+  //       console.log(post.code);
+  //       if(post.code === code) {
+  //           return true;
+  //       }
+  //       return false; 
+  //   });
 
+  // .find() is going to loop over each post and find the specific post we want based on the code we are given. 
+  const post = posts.find(post => post.code === code);
+  console.log(post);
+  
+  // similar to find() findIndex() returns the index of a given post 
   const postIndex = posts.findIndex(post => post.code === code);
   console.log(postIndex);
 

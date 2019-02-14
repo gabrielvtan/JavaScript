@@ -11,22 +11,37 @@
     <p>Snickers</p>
   </div>
 <script>
-  // const people = document.querySelectorAll('.people p');
-  // const peopleArray = Array.from(people, person => {
-  //   console.log(person);
-  //   return person.textContent;
-  // });
-  // console.log(peopleArray);
-
-  // // const names = people.map(person => person.textContent);
-
+  // .from() and .of() are methods on the Array itself and not the prototype, so we have to treat them differently than .map() or .filter()  
+  // .from() will convert an array-ish(nodelist in this example) object into an actual array 
+  // '.people p' selects all the 'p's within the div class "people"
+  const people = document.querySelectorAll('.people p');
+  // console.log(people)
+  // we intentionally draw an error here and show that .map() does not work on the nodelist of people 
+//   const names = people.map(person => person.textContent);
+  //   console.log(names)
+  
+  // in order to make array methods work, we need to convert the nodelist into an array 
+  // we take the persons within the people nodelist and return the person.textContent using the Array.from() method 
+  const peopleArray = Array.from(people, person => {
+    console.log(person);
+    return person.textContent;
+  });
+  console.log(peopleArray);
+  
+  
   function sumAll() {
+    // we need to first convert arguments into an actual array before we can perform the reduce method  
+    // arguments is currently not an array  
+    // console.log(arguments)
     const nums = Array.from(arguments);
+    // reduce() executes a reducer function (that you provide) on each member of the array resulting in a single output value
+    // in our case, our function add the previous value with the next value 
     return nums.reduce((prev, next) => prev + next, 0);
   }
 
-  sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342);
-
+  console.log(sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342));
+  
+  // .of() creates an array of however many arguments you pass to it. 
   const ages = Array.of(12,4,23,62,34);
   console.log(ages);
 

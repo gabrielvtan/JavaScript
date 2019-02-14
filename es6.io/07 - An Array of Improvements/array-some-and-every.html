@@ -6,13 +6,16 @@
 </head>
 <body>
 <script>
+  // .some() and .every() are not new to ES6 - but are frequently overlooked  
   const ages = [32, 15, 19, 12];
 
   // 👵👨 is there at least one adult in the group?
+  // .some() allows you to return the ages which are over 18
   const adultPresent = ages.some(age => age >= 18);
   console.log(adultPresent);
 
   // 🍻 is everyone old enough to drink?
+  // .every() allows you to see if item in a given array meets the criteria 
   const allOldEnough = ages.every(age => age >= 19);
   console.log(allOldEnough);
 
