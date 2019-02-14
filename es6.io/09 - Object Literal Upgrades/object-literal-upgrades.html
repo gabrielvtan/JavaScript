@@ -10,6 +10,7 @@
   const last = 'bos';
   const age = 2;
   const breed = 'King Charles Cav';
+  // if the prop name and variable name are the same, you may leave the key out 
   const dog = {
     firstName: first,
     last,
@@ -18,7 +19,8 @@
     pals: ['Hugo', 'Sunny']
   };
   console.log(dog);
-
+  
+  // this is an example of method definitions within an object, you may leave out the colon: function - this is the shorthand version 
   const modal = {
     create(selector) {
 
@@ -30,7 +32,8 @@
 
     }
   }
-
+  
+  //This is an example of computed property names 
   function invertColor(color) {
       return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1),16)).toString(16)).slice(-6);
   }
@@ -38,14 +41,18 @@
   const key = 'pocketColor';
   const value = '#ffc600';
 
+  // Here we are using a function as the value of a new property of your object  
   const tShirt = {
     [key]: value,
     [`${key}Opposite`]: invertColor(value)
   };
+  console.log(tShirt);
 
+  // here is an example where you are passed keys and values are two different arrays with matching indexes
   const keys = ['size', 'color', 'weight'];
   const values = ['medium', 'red', 100];
 
+  // .shift() allows you to map given values to a specific key 
   const shirt = {
     [keys.shift()]: values.shift(),
     [keys.shift()]: values.shift(),
