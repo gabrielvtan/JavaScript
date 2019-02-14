@@ -8,6 +8,8 @@
 <script>
   const inventors = ['Einstein', 'Newton', 'Galileo'];
   const newInventors = ['Musk', 'Jobs'];
+
+  // we have to use the spread function in order to pass each elements instead of the entire array 
   inventors.push(...newInventors);
   console.log(inventors);
 
@@ -17,6 +19,7 @@
     alert(`Hey there ${first} ${last}`);
   }
 
+  // Here we can pass the elements of an array as the arguments of a given function 
   sayHi(...name);
 
 </script>

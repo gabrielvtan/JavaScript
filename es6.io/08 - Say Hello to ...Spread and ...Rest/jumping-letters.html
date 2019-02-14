@@ -30,7 +30,20 @@
   <h2 class="jump">SPREADS!</h2>
 
 <script>
+  // Here we will use the spread operator, querySelector, innerHTML, join, map
+  // in order to make the letter jump on a given screen
+  // lets start by first selecting the <h2> element '.jump'
+  const heading = document.querySelector('.jump');
   
+  //We now add the heading.text context as an html tag
+  heading.innerHTML = sparanWrap(heading.textContent);
+
+  // here we will use the spread operator to separate each letter of the word 
+  // we will return each letter as a template string which we join together 
+  function sparanWrap(word) {
+      return [...word].map(letter => `<span>${letter}</span>`).join('');
+  }
+
 </script>
 </body>
 </html>

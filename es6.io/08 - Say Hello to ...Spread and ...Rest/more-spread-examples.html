@@ -12,6 +12,8 @@
   </div>
 <script>
   const people = Array.from(document.querySelectorAll('.people p'));
+  // you may also use the spread operator to select all tags as '.people p' is a nodelist 
+  // const people = [...document.querySelectorAll('people p')];
   const names = people.map((person) => person.textContent );
 
   const deepDish = {
@@ -20,8 +22,9 @@
     ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
   };
 
+  // here we can use the spread operator to spread the ingredients within the deepDish object 
   const shoppingList = ['Milk', 'Flour', ...deepDish.ingredients];
-  // console.log(shoppingList);
+  console.log(shoppingList);
 
   const comments = [
     { id: 209384, text: 'I love your dog!' },
@@ -29,9 +32,16 @@
     { id: 632429, text: 'You are so dumb' },
     { id: 192834, text: 'Nice work on this wes!' },
   ];
-  const id = 632429;
-  const commentIndex = comments.findIndex(comment => comment.id === id);
 
+  // Here we want to delete a given mean comment 
+  const id = 632429;
+  // we first have to find the index of a given comment 
+  const commentIndex = comments.findIndex(comment => comment.id === id);
+  console.log(commentIndex);
+  
+  // then we have to create a new list without the comment that was deleted 
+  // Here we will slice(add) everthing up to the mean comment, then also slice everything after the mean comment 
+  // we dont have to pass a second variable to the second slice as it will go to the end 
   const newComments = [...comments.slice(0,commentIndex), ...comments.slice(commentIndex + 1)];
   console.log(newComments);
 
