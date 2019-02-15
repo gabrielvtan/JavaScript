@@ -6,6 +6,9 @@
 </head>
 <body>
 <script>
+  // here we are simulating the process of connecting to a database  
+  // our goal within the excercise to create two functions which are Promises
+  // then chain them together 
   const posts = [
     { title: 'I love JavaScript', author: 'Wes Bos', id: 1 },
     { title: 'CSS!', author: 'Chris Coyier', id: 2 },
@@ -30,22 +33,27 @@
         } else {
           reject(Error('No Post Was Found!'));
         }
-      }, 200);
+      }, 2000);
     });
   }
 
+  //Here we are doing an additional Promise where we will get the object of 
+  // from the authors array 
   function hydrateAuthor(post) {
     // create a new promise
     return new Promise((resolve, reject) => {
-      // find the author
-      const authorDetails = authors.find(person => person.name === post.author);
-      if(authorDetails) {
-        // "hydrate" the post object with the author object
-        post.author = authorDetails;
-        resolve(post);
-      } else {
-        reject(Error('Can not find the author'));
-      }
+      setTimeout(() => {
+        // find the author
+        const authorDetails = authors.find(person => person.name === post.author);
+        if(authorDetails) {
+            // "hydrate" the post object with the author object
+            // we are overwritting the post author details 
+            post.author = authorDetails;
+            resolve(post);
+        } else {
+            reject(Error('Can not find the author'));
+        }
+      }, 2000);
     });
   }
 

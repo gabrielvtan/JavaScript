@@ -6,19 +6,24 @@
 </head>
 <body>
 <script>
-  const wes = Symbol('Wes');
+  // Symbols are unique identifiers - which will allow you to never have a naming collision 
+  const wes = Symbol('Wes'); // 'Wes' is a descriptor 
   const person = Symbol('Wes');
+  console.log(wes)
+  console.log(person)
 
   const classRoom = {
     [Symbol('Mark')] : { grade: 50, gender: 'male' },
     [Symbol('olivia')]: { grade: 80, gender: 'female' },
     [Symbol('olivia')]: { grade: 80, gender: 'female' },
   };
-
+  
+  // you may not iterate of Symbols - you may not loop over any of your symbols 
   for (const person in classRoom) {
     console.log(person);
   }
 
+  // You have to use this construction if you want to be able to iterate over the object containing symbols 
   const syms = Object.getOwnPropertySymbols(classRoom);
   const data = syms.map(sym => classRoom[sym]);
   console.log(data);

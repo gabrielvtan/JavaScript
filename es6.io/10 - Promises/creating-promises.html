@@ -6,8 +6,12 @@
 </head>
 <body>
 <script>
+  // Promise constructor takes a function as an argument of the variable resolve and reject 
+  // Your promise will either resolve (succed) or reject(error) 
   const p = new Promise((resolve, reject) => {
     setTimeout(() => {
+      // resolve('Gabby is cool');
+      // make sure to pass the Error object so that you can actually find the correct line of the error message 
       reject(Error('Err wes isn\'t cool'));
     }, 1000);
   });

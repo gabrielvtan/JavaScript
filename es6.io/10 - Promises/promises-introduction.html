@@ -6,8 +6,18 @@
 </head>
 <body>
 <script>
+// Promises are often used when you are calling a JSON API or making an AJAX call 
+// Promise is something that will happen in the future, but not immediately 
+// fetch ques up the search and immediately puts in the postsPromise - this is bc JS is asynchronous code 
 const postsPromise = fetch('https://wesbos.com/wp-json/wp/v2/posts');
 
+// Here is an example of why Promises are important
+console.log('Got post')
+console.log(postsPromise)
+
+// .then() takes a promise and only runs a given method once the data is fetched 
+// we need to make sure that we transform the data into the correct format - in our case, it is a JSON object 
+// As good case practices, also add .catch() method in order to catch errors that happen along the way 
 postsPromise
   .then(data => data.json())
   .then(data => { console.log(data) })
