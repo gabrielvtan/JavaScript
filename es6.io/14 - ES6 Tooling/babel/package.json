@@ -1,0 +1,39 @@
+{
+  "name": "babel",
+  "version": "1.0.0",
+  "description": "- it's a JS compiler that converts ES6 to ES5\r - it has expanded to future JS and React stuff \r - You need webpack if you are using modules within your application",
+  "main": "app.js",
+  "scripts": {
+    "babel": "babel app.js --watch --out-file app-complied.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^7.0.0-beta.41",
+    "babel-preset-env": "^1.7.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "browsers": [
+              ">0.25%",
+              "not ie 11",
+              "not op_mini all"
+            ]
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.2"
+  }
+}

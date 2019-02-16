@@ -5,8 +5,15 @@
   <title>System JS</title>
 </head>
 <body>
+    <!-- Here we are using SystemJs with jspm which will allow us to run our JS in the browser without the overhead from npm -->
+    <!-- We stil have to run this html through a local server -->
+    <!-- this is the quick and dirty way to start a server -->
   <script src="https://jspm.io/system@0.19.js"></script>
   <script>
+      // First we have to set the configuration for the transpiler  
+      System.config({ transpiler: 'babel' })
+      // Next we then import the file we'd like to put into the HTML 
+      System.import('./main.js')
 
   </script>
 </body>

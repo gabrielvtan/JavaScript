@@ -1,0 +1,17 @@
+{
+  "name": "systemjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "browser-sync start --director --server --files '*.js, *.html, *.css'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.26.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
