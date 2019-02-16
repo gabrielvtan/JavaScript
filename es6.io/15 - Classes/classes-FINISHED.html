@@ -6,26 +6,36 @@
 </head>
 <body>
 <script>
+  // Here is how we create a class of a given Dog 
+  // the only method that is absolutely needed is 'constructor'
+  // which is the method that allows you to instantiate a class 
   class Dog {
     constructor(name, breed) {
       this.name = name;
       this.breed = breed;
     }
+    // Whnever you have a method within a class - you can simply add it 
     bark() {
       console.log(`Bark Bark! My name is ${this.name}`)
     }
     cuddle() {
       console.log(`I love you owner!`);
     }
+    // this is a static method - which can only be called on the class Dog directly 
+    // Dog.info() - not snickers.info()
     static info() {
       console.log('A dog is better than a cat by 10 times');
     }
+    // this is a getter - it is accessed by snickers.description
+    // this is not a method - it is just a property you can put on the class 
     get description() {
       return `${this.name} is a ${this.breed} type of dog`;
     }
+    // this is a setter to set a value on a given object 
     set nicknames(value) {
       this.nick = value.trim();
     }
+    // and here we can now get the nickname of a given dog 
     get nicknames() {
       return this.nick.toUpperCase();
     }

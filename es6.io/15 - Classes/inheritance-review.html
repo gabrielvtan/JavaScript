@@ -6,20 +6,31 @@
 </head>
 <body>
 <script>
+  // Lets start by talking about prototyping Inheritance
+  // This Constructor Dog function will create new dogs 
   function Dog(name, breed) {
     this.name = name;
     this.breed = breed;
   }
+  // Prototypal inheritance is when you put a method on the original constructor, it will be inherited by the rest of the dogs 
   Dog.prototype.bark = function() {
     console.log(`Bark Bark! My name is ${this.name}`)
   }
 
+  // Here is how you a new dog from the class constructor Dog 
   const snickers = new Dog('Snickers', 'King Charles');
   const sunny = new Dog('Sunny', 'Golden Doodle');
 
+  snickers.bark()
+  sunny.bark()
+  
+  // here we are overwriting the bark function by writting it after 
   Dog.prototype.bark = function() {
     console.log(`Bark Bark🇨🇦🇨🇦🇨🇦! My name is ${this.name} and I'm a ${this.breed}`);
   }
+
+  snickers.bark()
+  sunny.bark()
 
   Dog.prototype.cuddle = function() {
     console.log(`I love you owner!`);

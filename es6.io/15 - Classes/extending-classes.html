@@ -6,6 +6,8 @@
 </head>
 <body>
 <script>
+  // ES classes may also be extended to other classes 
+  // as a rule of thumb - don't extend beyond 2 levels   
   class Animal {
     constructor(name) {
       this.name = name;
@@ -22,11 +24,16 @@
     }
   }
 
+  // Here we extend the Class of Animal and create a more specific class of Dog 
+  // we still need the constructor to include the additional variables
   class Dog extends Animal {
     constructor(name, breed) {
+      // instead of this.name, you need to use super(name) in order to inherit the properties 
+      // from the class it is currently extending from   
       super(name);
       this.breed = breed;
     }
+    // we then also add additional methods on the extend class 
     bark() {
       console.log('Bark bark I\'m a dog');
     }

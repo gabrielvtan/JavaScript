@@ -6,14 +6,22 @@
 </head>
 <body>
 <script>
+  // Here we are going to create our own classes off a given array   
+  // like before we need a constructor that takes in the name of the move and a rest operator 
+  // to take in the rest of the movies 
+  // You must always create FIRST thing you are extending before you start defining
+  // other variables within a given class 
   class MovieCollection extends Array {
     constructor(name, ...items) {
       super(...items);
       this.name = name;
     }
+    // we can then also add additional methods to the class 
     add(movie) {
       this.push(movie);
     }
+    // we set a limit to the number of stars
+    // then this.sort is the movies within the collection 
     topRated(limit = 10) {
       return this.sort((a, b) => (a.stars > b.stars ? -1 : 1)).slice(0, limit);
     }
@@ -27,6 +35,8 @@
   );
 
   movies.add({ name: 'Titanic', stars: 5 });
+
+  console.table(movies.topRated())
 
 </script>
 </body>
