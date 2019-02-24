@@ -6,19 +6,23 @@
 </head>
 <body>
 <script>
+  // Here we will use Proxies in order to make sure we have the correct camel case for elements within a given object 
   const safeHandler = {
     set(target, name, value) {
+      // Here we will create a list of keys in lowercase to check against the object
       const likeKey = Object.keys(target).find(k => k.toLowerCase() === name.toLowerCase());
-
+      // Here we pass the error message and the suggestion of what could be the correct key 
       if (!(name in target) && likeKey) {
         throw new Error(`Oops! Looks like like we already have a(n) ${name} property but with the case of ${likeKey}.`);
       }
+      // otherwise, just set the key for them. 
       target[name] = value;
     }
   };
 
   const safety = new Proxy({ id: 100 }, safeHandler);
 
+  // This should draw an error because the 'ID' is incorrect 
   safety.ID = 200;
 
 </script>

@@ -6,6 +6,7 @@
 </head>
 <body>
 <script>
+  // Here we will use a for-of loop in order to create a new generator from an array   
   function* lyrics() {
     yield `But don't tell my heart`;
     yield `My achy breaky heart`;
@@ -16,7 +17,8 @@
   }
 
   const achy = lyrics();
-
+  
+  // Notice that we are not using next  
   for (const line of achy) {
     console.log(line);
   }

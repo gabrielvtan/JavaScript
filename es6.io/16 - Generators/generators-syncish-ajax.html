@@ -6,11 +6,20 @@
 </head>
 <body>
 <script>
+  // One of the major uses of Generators is to do waterfall like Ajax requests 
+  // /search/gabby -> /user/123 -> /photo/256 
+  // this allows us to go through multiple ajax requests like the example above 
+  // need information from one request to continue the next request
 
+  // first fetch the url, then return the data.json which returns a promise -
+  // once we our data - we pass the function dataGen = steps() in order to pass next each http ajax request 
+  // remember that the .next(data) is needed in order for the generator to work 
   function ajax(url) {
     fetch(url).then(data => data.json()).then(data => dataGen.next(data))
   }
 
+  // Here we will create our generator 
+  // this is a waterfall of ajax calls - each call with execute then stop 
   function* steps() {
     console.log('fetching beers');
     const beers = yield ajax('http://api.react.beer/v2/search?q=hops&type=beer');

@@ -6,15 +6,21 @@
 </head>
 <body>
 <script>
+  // Here we will create a phoneHandler to handle the set and get traps 
+  // set takes in the variables (target, name, value) while get just takes (target, name) 
+  // Here we will use the proxy to reformat phone numbers consistently 
   const phoneHandler = {
     set(target, name, value) {
+      // Here we will run a match on just the numbers and join them   
       target[name] = value.match(/[0-9]/g).join('');
     },
+    // Then once we pull the object out of the inputted format, we then replace regex to format it in the standard phone number fashion 
     get(target, name) {
       return target[name].replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     }
   }
 
+  // Here we are passing a blank object so that we can set whatever we decide to input (ex: phoneNumbers.home)
   const phoneNumbers = new Proxy({}, phoneHandler);
 </script>
 </body>

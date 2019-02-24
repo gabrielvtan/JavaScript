@@ -6,6 +6,10 @@
 </head>
 <body>
 <script>
+  // A generator function in one that you can start and stop at a given time
+  // a function that may be paused and then have information passed at a later point 
+  // you create a generator function by adding an * after the word function
+  // yielding from a function - this will return that one item until that function is called again 
   function* listPeople() {
     let i = 0;
     yield i;
@@ -16,6 +20,9 @@
   }
 
   const people = listPeople();
+  
+  //this gives the next value post yield 
+  console.log(people.next())
 
   const inventors = [
     { first: 'Albert', last: 'Einstein', year: 1879 },
@@ -27,6 +34,7 @@
     { first: 'Max', last: 'Planck', year: 1858 },
   ];
 
+  // Here is how we create a loop for going through an indeterminant amount of inventors 
   function* loop(arr) {
     console.log(inventors);
     for (const item of arr) {
@@ -35,6 +43,9 @@
   }
 
   const inventorGen = loop(inventors);
+
+  console.log(inventorGen.next())
+  console.log(inventorGen.next().value)
 
 
 </script>
