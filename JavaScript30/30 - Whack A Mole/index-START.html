@@ -9,6 +9,7 @@
 <body>
 
   <h1>Whack-a-mole! <span class="score">0</span></h1>
+  <!-- Here we have to add the onClick listener to startGame() -->
   <button onClick="startGame()">Start!</button>
 
   <div class="game">
@@ -33,9 +34,83 @@
   </div>
 
 <script>
+  // Here we will select all the holes and the score board  
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  // Here we will create a variable called lastHole our randomHole function 
+  let lastHole;
+  // Here we will create a variable called timeUp to set the length of the game - we will us this in the peep and startGame functions
+  let timeUp = false;  
+  // Here let's create a variable for score and set the default to 0 - we will use this in startGame and bonk functions
+  let score = 0;
+
+
+  // We first need to create a function that gives us a random time between a min and a max value
+  // Think of this as a utitlity function 
+  function randomTime (min, max) {
+      return Math.round(Math.random() * (max - min) + min);
+  }
+
+  // Now we have to select a random hole for the mole to pop up from 
+  // This function will take a list of wholes which we query selected
+  // We have to create a function which gives us a random index value for the number of holes we have 
+  // we want to make sure that the mole doesn't pop up in the same hole twice 
+  function randomHole (holes) {
+      //console.log(holes.length)
+      const idx = Math.floor(Math.random() * holes.length);
+      const hole = holes[idx];
+      // console.log(hole)
+      // Here we will add a check to see if the new hole is equal to the last hole
+      // if it is equal to the last hole, then run the function again, otherwise set lastHole to hole and return it
+      // this is a recursive function 
+      if (hole === lastHole) {
+          console.log('Nah you selected the same hole')
+          return randomHole(holes)
+      }
+       lastHole = hole;
+       return hole;
+  }
+
+  // Next we now have to get the moles to pop up 
+  // First we get a randomTime and randomHole to select which mole pops up for how long 
+  function peep() {
+      const time = randomTime(700, 1500);
+      const hole = randomHole(holes);
+      // console.log(time, hole);
+      // we will now add the class 'up' to the hole and remove the class once the time is up 
+      hole.classList.add('up');
+      setTimeout(() => {
+          hole.classList.remove('up')
+          // Here we will keep running peep until the game time is up 
+          if (!timeUp) peep(); 
+      }, time);
+  }
+
+  // Now we have to create the startGame function 
+  // We have to reset the scoreBoard, set timeUp to false, set score to 0, initiate peep, and setTimeout for timeUp 
+  function startGame () {
+      scoreBoard.textContent = 0;
+      timeUp = false;
+      score = 0;
+      peep();
+      setTimeout(() => timeUp = true, 10000)
+  }
+
+  // Finally we have to create a function for bonking the moles on the head
+  function bonk (event) {
+    // console.log(event)
+    // Here we will add a check so that JS functions used to simulate clicks are not present
+    if (!event.isTrusted) return; // cheater!
+    score++;
+    // Here have to remove the 'up' class whenever the mole is bonked
+    // we have to use this.parentNode in order to remove the class of 'up' for the mole bonked
+    this.parentNode.classList.remove('up');
+    scoreBoard.textContent = score;
+  }
+
+  // We need to create an eventListener here for when we 'click' on the moles
+  moles.forEach(mole => mole.addEventListener('click', bonk));
 
 </script>
 </body>

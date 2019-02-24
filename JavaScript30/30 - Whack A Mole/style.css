@@ -1,7 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 10px;
-  background: #ffc600;
+  background: white;
 }
 
 *, *:before, *:after {
@@ -61,6 +61,7 @@ h1 {
   top: 100%;
   width: 100%;
   height: 100%;
+  /* Here is the speed at which the mole pops up */
   transition:all 0.4s;
 }
 
