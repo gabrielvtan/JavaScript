@@ -7,25 +7,32 @@
 
 <body>
   <script>
-    // async function go() {
-    //   const p1 = fetch('https://api.github.com/users/wesbos');
-    //   const p2 = fetch('https://api.github.com/users/stolinski');
-    //   // Wait for both of them to come back
-    //   const res = await Promise.all([p1, p2]);
-    //   const dataPromises = res.map(r => r.json());
-    //   const [wes, scott] = await Promise.all(dataPromises);
-    //   console.log(wes, scott);
-    // }
+    async function go() {
+      const p1 = fetch('https://api.github.com/users/gabrielvtan');
+      const p2 = fetch('https://api.github.com/users/redcartel');
+      // Wait for both of them to come back
+      // here we can put an await around both of the api endpoints
+      // Promise.all takes an array of promises - this creates a mega promise which doesn't resolve until both promises have been resolved 
+      const res = await Promise.all([p1, p2]);
+      // again we have to parse each of the responses as json 
+      const dataPromises = res.map(r => r.json());
+      // here we destructure the array then await again the parsing of the json data 
+      const [gabby, carter] = await Promise.all(dataPromises);
+      console.log(gabby, carter);
+    }
 
-    // go();
+    go();
 
+    // This operates the same way as the function above, except that take in the array of names
+    // instead of defining each enpoint, we are going to use a base URL which we will loop over for each username 
     async function getData(names) {
       const promises = names.map(name => fetch(`https://api.github.com/users/${name}`).then(r => r.json()));
+      // we can create as the response if don't know the number of usernames we want to pass 
       const people = await Promise.all(promises);
       console.log(people);
     }
 
-    getData(['wesbos', 'stolinski', 'darcyclarke']);
+    getData(['gabrielvtan', 'redcartel', 'greg-smith1']);
   </script>
 </body>
 

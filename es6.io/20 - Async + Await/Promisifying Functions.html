@@ -7,6 +7,9 @@
 
 <body>
   <script>
+    // This is the non-Promise way of dealing with a callback based function
+    // this will get us our current GPS position
+    // it takes two arguments 1) the success function 2) the error function 
     // navigator.geolocation.getCurrentPosition(function (pos) {
     //   console.log('it worked!');
     //   console.log(pos);
@@ -15,12 +18,16 @@
     //   console.log(err);
     // });
 
+    // Here we will Promisify the callback function 
+    // Here we will pass resolve and reject like normal and also pass a rest operators for the args.
+    // ...args can be variables such as accuracy of position depending upon battery life 
     function getCurrentPosition(...args) {
       return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(...args, resolve, reject);
       });
     }
 
+    // we then need to create an async function because we cannot await for things out in the open 
     async function go() {
       console.log('starting');
       const pos = await getCurrentPosition();

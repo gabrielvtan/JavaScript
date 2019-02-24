@@ -16,8 +16,14 @@
       });
     }
 
+    // Here we will create a higher-order error function 
+    // fn is any function - here we will return a function which spreads the arguments into another function to catch the errors 
+    // this is great for handling errors in a general way
+    // however, the try and catch method is more practical for specific errors 
     function catchErrors(fn) {
       return function (...args) {
+        // at this point fn is our go() function 
+        // ...args is inserted as the variable so that we can pass first and last name in later   
         return fn(...args).catch((err) => {
           console.error('Ohhhh nooo!!!!!');
           console.error(err);
@@ -25,6 +31,11 @@
       }
     }
 
+    // Here we will create an aysnchronous function where we will await a specific function 
+    // async await is built upon promises - it is not a replacement 
+    // await functions need to be created within the async functions
+    // you may also create it as an arrow function - const go = async () => {}
+    // you may use the try {} and catch{error} for resolving and rejecting or you may do a higher order function 
     async function go(name, last) {
       console.log(`Starting for ${name} ${last}!`);
       const res = await breathe(1000);
@@ -37,10 +48,12 @@
       console.log(res4);
       console.log('end');
     }
-
+    
+    // Here we have to create a function where we pass go() into catchErrors() since catchErrors is a HOF
     const wrappedFunction = catchErrors(go);
-
-    wrappedFunction('Wes', 'Bos');
+    
+    // Here we then run wrappedFunction with the first and last name we want to console.log() 
+    wrappedFunction('Gabby', 'Tan');
   </script>
 </body>
 

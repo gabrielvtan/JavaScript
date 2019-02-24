@@ -12,6 +12,7 @@
 </head>
 <body>
 
+<!-- with Maps, we can use objects as the key - like a metadata dictionary -->
 <button>Snakes 🐍</button>
 <button>Cry 😂</button>
 <button>Ice Cream 🍦</button>
@@ -19,9 +20,10 @@
 <button>Dancer 💃</button>
 
 <script>
+  // Here we will use Maps in order to keep track of the click count on each button 
   const clickCounts = new Map();
   const buttons = document.querySelectorAll('button');
-
+  // get(this) is the value of the button
   buttons.forEach(button => {
     clickCounts.set(button, 0);
     button.addEventListener('click', function() {

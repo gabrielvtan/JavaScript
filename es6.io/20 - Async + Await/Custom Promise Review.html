@@ -7,15 +7,17 @@
 
 <body>
   <script>
+    // When you want to chain promises, then you create the function like this!  
     function breathe(amount) {
       return new Promise((resolve, reject) => {
-        if (amount < 500) {
+        if (amount < 200) {
           reject('That is too small of a value');
         }
         setTimeout(() => resolve(`Done for ${amount} ms`), amount);
       });
     }
 
+    // Here we chain the function then recursively pass it again 
     breathe(1000).then(res => {
       console.log(res);
       return breathe(500);

@@ -9,18 +9,25 @@
 
 <body>
   <script>
-    // fetch('api.github.com/users/wesbos').then(res => {
-    //   return res.json();
-    // }).then(res => {
-    //   console.log(res);
-    // }).catch(err => {
-    //   console.error('OH NOO!!!!!!!');
-    //   console.error(err);
-    // })
+    // Here is the standard fetch ajax request which will allow you make a simple Native Promise 
+    // using then and catch 
+    fetch('https://api.github.com/users/gabrielvtan').then(res => {
+      return res.json();
+    }).then(res => {
+      console.log(res);
+    }).catch(err => {
+      console.error('OH NOO!!!!!!!');
+      console.error(err);
+    })
 
     const video = document.querySelector('.handsome');
-
+   
+    // this is how you access the webcam on someone's computer 
+    // getUserMedia also returns a promise which we can resolve or reject 
     navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
+      // console.log(mediaStream)
+      // here we will set the sourceObject equal to the mediaStream and set it into the video element 
+      // we then load and play the video 
       video.srcObject = mediaStream;
       video.load();
       video.play();
